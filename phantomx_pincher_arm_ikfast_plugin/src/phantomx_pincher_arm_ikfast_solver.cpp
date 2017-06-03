@@ -88,6 +88,15 @@ using namespace std; // necessary to get std math routines
 namespace IKFAST_NAMESPACE {
 #endif
 
+template <typename T>
+bool
+my_isnan(const T x)
+{
+#if __cplusplus >= 201103L
+  using std::isnan;
+#endif
+  return isnan(x);
+}
 inline float IKabs(float f) { return fabsf(f); }
 inline double IKabs(double f) { return fabs(f); }
 
@@ -177,11 +186,11 @@ inline float IKatan2Simple(float fy, float fx) {
     return atan2f(fy,fx);
 }
 inline float IKatan2(float fy, float fx) {
-    if( isnan(fy) ) {
-        IKFAST_ASSERT(!isnan(fx)); // if both are nan, probably wrong value will be returned
+    if( my_isnan(fy) ) {
+        IKFAST_ASSERT(!my_isnan(fx)); // if both are nan, probably wrong value will be returned
         return float(IKPI_2);
     }
-    else if( isnan(fx) ) {
+    else if( my_isnan(fx) ) {
         return 0;
     }
     return atan2f(fy,fx);
@@ -190,11 +199,11 @@ inline double IKatan2Simple(double fy, double fx) {
     return atan2(fy,fx);
 }
 inline double IKatan2(double fy, double fx) {
-    if( isnan(fy) ) {
-        IKFAST_ASSERT(!isnan(fx)); // if both are nan, probably wrong value will be returned
+    if( my_isnan(fy) ) {
+        IKFAST_ASSERT(!my_isnan(fx)); // if both are nan, probably wrong value will be returned
         return IKPI_2;
     }
-    else if( isnan(fx) ) {
+    else if( my_isnan(fx) ) {
         return 0;
     }
     return atan2(fy,fx);
@@ -213,7 +222,7 @@ inline CheckValue<T> IKatan2WithCheck(T fy, T fx, T epsilon)
     CheckValue<T> ret;
     ret.valid = false;
     ret.value = 0;
-    if( !isnan(fy) && !isnan(fx) ) {
+    if( !my_isnan(fy) && !my_isnan(fx) ) {
         if( IKabs(fy) >= IKFAST_ATAN2_MAGTHRESH || IKabs(fx) > IKFAST_ATAN2_MAGTHRESH ) {
             ret.value = IKatan2Simple(fy,fx);
             ret.valid = true;
@@ -482,7 +491,7 @@ if( sj4array[0] >= -1-IKFAST_SINCOS_THRESH && sj4array[0] <= 1+IKFAST_SINCOS_THR
     j4array[1] = j4array[0] > 0 ? (IKPI-j4array[0]) : (-IKPI-j4array[0]);
     cj4array[1] = -cj4array[0];
 }
-else if( isnan(sj4array[0]) )
+else if( my_isnan(sj4array[0]) )
 {
     // probably any value will work
     j4valid[0] = true;
@@ -548,7 +557,7 @@ if( cj3array[0] >= -1-IKFAST_SINCOS_THRESH && cj3array[0] <= 1+IKFAST_SINCOS_THR
     j3array[1] = -j3array[0];
     sj3array[1] = -sj3array[0];
 }
-else if( isnan(cj3array[0]) )
+else if( my_isnan(cj3array[0]) )
 {
     // probably any value will work
     j3valid[0] = true;
@@ -758,7 +767,7 @@ if( cj3array[0] >= -1-IKFAST_SINCOS_THRESH && cj3array[0] <= 1+IKFAST_SINCOS_THR
     j3array[1] = -j3array[0];
     sj3array[1] = -sj3array[0];
 }
-else if( isnan(cj3array[0]) )
+else if( my_isnan(cj3array[0]) )
 {
     // probably any value will work
     j3valid[0] = true;
