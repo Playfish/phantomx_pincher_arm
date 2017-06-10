@@ -1,0 +1,26 @@
+<package>
+  <name>phantomx_pincher_arm_gazebo</name>
+  <version>0.1.0</version>
+  <description>phantomx_pincher_arm_gazebo</description>
+  <maintainer email="1271087623@qq.com">Carl</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://gazebosim.org/w/index.php?title=Tutorials/1.9/Using_A_URDF_In_Gazebo</url>
+  <url type="bugtracker">https://github.com/osrf/gazebo_ros_demos/issues</url>
+  <url type="repository">https://github.com/osrf/gazebo_ros_demos</url>
+
+  <author email="1271087623@qq.com">Carl</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <run_depend>gazebo_plugins</run_depend>
+  <run_depend>gazebo_ros</run_depend>
+  <run_depend>gazebo_ros_control</run_depend>
+  <run_depend>rrbot_control</run_depend>
+  <run_depend>rrbot_description</run_depend>
+  <run_depend>xacro</run_depend>
+
+  <export>
+  </export>
+</package>

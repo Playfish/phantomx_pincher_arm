@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- these are the arguments you can pass this launch file, for example paused:=true -->
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  <!-- By default, we do not start a database (it can be large) -->
+  <arg name="db" default="false" />
+
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find phantomx_pincher_arm_gazebo)/worlds/phantomx_pincher_arm.world"/>
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+  </include>
+
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find phantomx_pincher_arm_description)/urdf/phantomx_pincher_arm.urdf.xacro'"/>
+
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+    args="-urdf -model phantomx_pincher_arm -param robot_description"/>
+  <!-- Load arm description, state and controllers in simulation mode 
+  <include file="$(find phantomx_pincher_arm_bringup)/launch/arm.launch">
+    <arg name="simulation" value="true"/>
+  </include>
+-->
+
+  <include file="$(find phantomx_pincher_arm_control)/launch/phantomx_pincher_arm_control.launch"/>
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="/use_gui" value="false"/>
+    <rosparam param="/source_list">[/phantomx_pincher_arm/joint_states]</rosparam>
+  </node>
+  <!-- Run the main MoveIt executable 
+  <include file="$(find phantomx_pincher_arm_moveit_config)/launch/move_group.launch">
+    <arg name="allow_trajectory_execution" value="true"/>  -->
+<!--    <arg name="fake_execution" value="false"/>   trajectories are executed by simulated controllers 
+    <arg name="info" value="true"/>
+    <arg name="debug" value="$(arg debug)"/>
+  </include>-->
+
+  <!-- Run Rviz and load the default config to see the state of the move_group node 
+  <include file="$(find phantomx_pincher_arm_moveit_config)/launch/moveit_rviz.launch">
+    <arg name="config" value="true"/>
+    <arg name="debug" value="$(arg debug)"/>
+  </include>
+-->
+  <!-- If database loading was enabled, start mongodb as well
+  <include file="$(find phantomx_pincher_arm_moveit_config)/launch/default_warehouse_db.launch" if="$(arg db)"/> -->
+</launch>

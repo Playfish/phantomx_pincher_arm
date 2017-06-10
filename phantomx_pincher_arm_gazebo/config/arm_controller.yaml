@@ -1,0 +1,35 @@
+arm_controller:
+  type: position_controllers/JointTrajectoryController #effort_controllers/JointTrajectoryController
+  joints:
+      - arm_shoulder_pan_joint
+      - arm_bicep_joint
+      - arm_forearm_joint
+      - arm_wrist_flex_joint
+  constraints:
+      goal_time: 0.6
+      stopped_velocity_tolerance: 0.05
+      arm_shoulder_pan_joint: {trajectory: 0.1, goal: 0.1}
+      arm_bicep_joint: {trajectory: 0.1, goal: 0.1}
+      arm_forearm_joint: {trajectory: 0.1, goal: 0.1}
+      arm_wrist_flex_joint: {trajectory: 0.1, goal: 0.1}
+  gains: # Required because we're controlling an effort interface
+    arm_shoulder_pan_joint: {p: 10000.0, i: 0.0, d: 0.0, i_clamp: 0.0, i_clamp_min: 0.0, i_clamp_max: 0.0}
+    arm_bicep_joint: { p: 10000.0, i: 50.0, d: 500.0, i_clamp: 0.0, i_clamp_min: -100.0, i_clamp_max: 100.0}
+    arm_forearm_joint: { p: 10000.0, i: 50.0, d: 500.0, i_clamp: 0.0, i_clamp_min: -100.0, i_clamp_max: 100.0}
+    arm_wrist_flex_joint: { p: 10000.0, i: 50.0, d: 500.0, i_clamp: 0.0, i_clamp_min: -100.0, i_clamp_max: 100.0}
+  stop_trajectory_duration: 0.5
+  state_publish_rate:  25
+  action_monitor_rate: 10
+gripper_controller:
+  type: position_controllers/JointTrajectoryController
+  joints:
+      - gripper_link_joint
+  constraints:
+      goal_time: 0.6
+      stopped_velocity_tolerance: 0.05
+      gripper_link_joint: {trajectory: 0.1, goal: 0.1}
+  gains: # Required because we're controlling an effort interface
+    gripper_link_joint: { p: 10000.0, i: 50.0, d: 500.0, i_clamp: 0.0, i_clamp_min: -100.0, i_clamp_max: 100.0}
+  stop_trajectory_duration: 0.5
+  state_publish_rate:  25
+  action_monitor_rate: 10
