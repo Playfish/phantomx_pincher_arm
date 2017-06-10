@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<launch>
+
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find phantomx_pincher_arm_control)/config/phantomx_pincher_arm_control.yaml" command="load"/>
+  <rosparam file="$(find phantomx_pincher_arm_control)/config/phantomx_pincher_arm_controllers_manager.yaml" command="load"/>
+
+  <!-- load the controllers arm_shoulder_pan_position_controller arm_shoulder_lift_position_controller arm_elbow_flex_position_controller arm_wrist_flex_position_controller joint_state_controller-->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" ns="/phantomx_pincher_arm" args=" arm_controller joint_state_controller gripper_controller"/>
+
+  <!-- convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+    respawn="false" output="screen">
+    <remap from="/joint_states" to="/phantomx_pincher_arm/joint_states" />
+  </node>
+
+</launch>

@@ -1,0 +1,35 @@
+phantomx_pincher_arm:
+  arm_controller:
+    type: effort_controllers/JointTrajectoryController
+    joints:
+      - arm_shoulder_pan_joint
+      - arm_bicep_joint
+      - arm_forearm_joint
+      - arm_wrist_flex_joint
+      - gripper_link_joint
+    gains:
+      arm_shoulder_pan_joint: {p: 2.5, i: 0.0, d: 0.05}
+      arm_bicep_joint: {p: 2.5, i: 0.0, d: 0.05}
+      arm_forearm_joint: {p: 2.5, i: 0.0, d: 0.05}
+      arm_wrist_flex_joint: {p: 2.5, i: 0.0, d: 0.05}
+      gripper_link_joint: {p: 2.5, i: 0.0, d: 0.05}
+
+  gripper_controller:
+    # Unfortunately this controller type works only for grippers with a single joint :( 
+    #type: "effort_controllers/GripperActionController"
+    type: "effort_controllers/JointTrajectoryController"
+    joints: 
+      - gripper_joint
+      - gripper2_joint
+    gains: 
+      gripper_joint: {p: 2.5, i: 0.0, d: 0.05}
+      gripper2_joint: {p: 2.5, i: 0.0, d: 0.05}
+
+# For GripperActionController with moveit config
+#  gripper_controller:
+#    # Unfortunately this controller type works only for grippers with a single joint :( 
+#    type: "effort_controllers/GripperActionController"
+#    joint: gripper_joint
+#    gains: 
+#      gripper_joint: {p: 2.5, i: 0.0, d: 0.05}
+

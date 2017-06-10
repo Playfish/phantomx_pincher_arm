@@ -1,0 +1,29 @@
+phantomx_pincher_arm:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+
+  # Position Controllers ---------------------------------------
+  arm_shoulder_pan_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: arm_shoulder_pan_joint
+    pid: {p: 2.5, i: 0.0, d: 0.05}
+  arm_shoulder_lift_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: arm_bicep_joint
+    pid: {p: 2.5, i: 0.0, d: 0.05}
+  arm_elbow_flex_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: arm_forearm_joint
+    pid: {p: 2.5, i: 0.0, d: 0.05}
+  arm_wrist_flex_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: arm_wrist_flex_joint
+    pid: {p: 2.5, i: 0.0, d: 0.05}
+  arm_gripper_controller:
+    type: effort_controllers/JointPositionController
+    joint: gripper_link_joint
+    pid: {p: 2.5, i: 0.0, d: 0.05}
+
+
