@@ -18,11 +18,42 @@
     <xacro:include filename="$(find phantomx_pincher_arm_description)/urdf/phantomx_pincher_arm.xacro"/>
 
     <!-- As we don't have a base here, add a base_link link as location reference -->
-    <link name="base_link"/>
+    <link name="base_link">
+<!--      <inertial>
+        <mass value="6.39321" />
+        <inertia ixx="0.04593" ixy="-0.00259" ixz="-3e-05"
+                 iyy="0.03667" iyz="-0.00031" 
+                 izz="0.04858" />
+      </inertial>
+
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.5 0.5 "/>
+        </geometry>
+        <material name="Black"/>
+      </visual>
+
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.5 0.5 "/>
+        </geometry>
+      </collision> -->
+    </link>
 
     <!-- phantomx_pincher_arm macro //joints_vlimit="${joints_vlimit}" pan_llimit="-2.617" pan_ulimit="2.617// -->
     <phantomx_pincher_arm parent="base_link" color="White" gripper_color="White">
-        <origin xyz="0.12 0.00 0.140"/>
+        <origin xyz="0.0 0.00 0.0"/>
+<!--        <origin xyz="0.12 0.00 0.140"/-->
     </phantomx_pincher_arm>
     
+  <!-- ros_control plugin -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/phantomx_pincher_arm</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+  </gazebo>
+
 </robot>
