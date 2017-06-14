@@ -18,7 +18,7 @@ if __name__=='__main__':
 
     # The arm is controlled by a joint trajectory action
     rospy.loginfo('Waiting for arm_controller...')
-    client = actionlib.SimpleActionClient('phantomx_pincher_arm_gazebo/arm_controller/follow_joint_trajectory', FollowJointTrajectoryAction)
+    client = actionlib.SimpleActionClient('arm_controller/follow_joint_trajectory', FollowJointTrajectoryAction)
     client.wait_for_server()
     rospy.loginfo('...connected.')
 

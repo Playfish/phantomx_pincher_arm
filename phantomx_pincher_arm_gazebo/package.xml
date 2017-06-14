@@ -1,8 +1,8 @@
 <package>
   <name>phantomx_pincher_arm_gazebo</name>
   <version>0.1.0</version>
-  <description>phantomx_pincher_arm_gazebo</description>
-  <maintainer email="1271087623@qq.com">Carl</maintainer>
+  <description>turtlebot2i_gazebo</description>
+  <maintainer email="renee@interbotix.com">Renee Love</maintainer>
 
   <license>BSD</license>
 
@@ -10,7 +10,7 @@
   <url type="bugtracker">https://github.com/osrf/gazebo_ros_demos/issues</url>
   <url type="repository">https://github.com/osrf/gazebo_ros_demos</url>
 
-  <author email="1271087623@qq.com">Carl</author>
+  <author email="renee@interbotix.com">Renee Love</author>
 
   <buildtool_depend>catkin</buildtool_depend>
 

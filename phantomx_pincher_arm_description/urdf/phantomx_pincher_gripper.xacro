@@ -7,18 +7,33 @@
     <joint name="gripper_joint" type="prismatic">
       <origin xyz="0.070 0 0" rpy="0 0 0"/>
       <axis xyz="0 1 0"/>
-      <limit effort="30" velocity="0.001" lower="0.002" upper="0.032"/>
+      <dynamics friction="2500"/>
+      <limit effort="30" velocity="0.1" lower="0.002" upper="0.032"/>
       <parent link="arm_wrist_flex_link"/>
       <child link="gripper_active_link"/>
+      <calibration rising="0.0" />
     </joint> 
     
-    <transmission name="gripper_link_transmission">
+    <!--transmission name="gripper_link_transmission">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="gripper_joint" >
         <hardwareInterface>EffortJointInterface</hardwareInterface>
       </joint>
       <actuator name="gripper_actuator">
         <hardwareInterface>EffortJointInterface</hardwareInterface>
+      </actuator>
+    </transmission-->
+
+    <!-- version GripperCommand -->
+    <transmission name="gripper_link_transmission">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="gripper_joint" >
+        <hardwareInterface>EffortJointInterface</hardwareInterface>
+		<mechanicalReduction>1</mechanicalReduction>
+      </joint>
+      <actuator name="gripper_actuator">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+		<mechanicalReduction>1</mechanicalReduction>
       </actuator>
     </transmission>
 
@@ -27,12 +42,12 @@
     </pincher_finger>
      
     <!-- Finger 2 --> 
-    <!-- Note: currently static but should be a Mimic of Finger 1
+    <!-- Note: currently static but should be a Mimic of Finger 1-->
     <joint name="gripper2_joint" type="fixed">
-      <origin xyz="0.070 -0.016 0" rpy="0 0 0"/>
+      <origin xyz="0.070 -0.006 0" rpy="0 0 0"/>
       <parent link="arm_wrist_flex_link"/>
       <child link="gripper_active2_link"/>
-    </joint>   -->
+    </joint>   
 
     <pincher_finger name="gripper_active2" color="${color}" >
       <origin xyz="0 0 0" rpy="${M_PI} 0 0"/>
@@ -41,15 +56,17 @@
     <!-- Using Mimic -->
     <!-- gripper 2 joint -->
     <!--  TODO: Test Mimic -->
-    <joint name="gripper2_joint" type="prismatic">
+    <!--joint name="gripper2_joint" type="prismatic">
       <origin xyz="0.070 0 0" rpy="0 0 0"/>
       <axis xyz="0 1 0"/>
-      <limit effort="30" velocity="0.5" lower="-0.016" upper="-0.002"/>
+      <dynamics friction="2500"/>
+      <limit effort="30" velocity="0.1" lower="-0.032" upper="-0.002"/>
       <parent link="arm_wrist_flex_link"/>
       <child link="gripper_active2_link"/>
+      <calibration rising="0.0" /-->
 <!--      <mimic joint="gripper_joint" multiplier="-1"  offset = "0"/-->
-    </joint>  
-    <transmission name="gripper2_link_transmission">
+    <!--/joint-->  
+    <!--transmission name="gripper2_link_transmission">
       <type>transmission_interface/SimpleTransmission</type>
       <joint name="gripper2_joint" >
         <hardwareInterface>EffortJointInterface</hardwareInterface>
@@ -57,5 +74,19 @@
       <actuator name="gripper2_actuator">
         <hardwareInterface>EffortJointInterface</hardwareInterface>
       </actuator>
-    </transmission>
+    </transmission-->
+
+
+    <!-- version GripperCommand 
+    <transmission name="gripper2_link_transmission">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="gripper2_joint" >
+        <hardwareInterface>EffortJointInterface</hardwareInterface>
+		<mechanicalReduction>1</mechanicalReduction>
+      </joint>
+      <actuator name="gripper2_actuator">
+        <hardwareInterface>PositionJointInterface</hardwareInterface>
+		<mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>-->
 </robot>

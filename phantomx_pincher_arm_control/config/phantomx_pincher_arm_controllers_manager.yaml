@@ -33,3 +33,5 @@ phantomx_pincher_arm:
 #    gains: 
 #      gripper_joint: {p: 2.5, i: 0.0, d: 0.05}
 
+#gain: 
+#      gripper_link_joint: {p: 2.5, i: 0.0, d: 0.05}
