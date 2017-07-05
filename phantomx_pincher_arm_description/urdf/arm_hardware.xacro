@@ -12,20 +12,20 @@
 
     <link name="${name}_link">
       <!-- TODO: This inertial field needs doesn't contain reliable data!! -->
-       <inertial>
+       <!--<inertial>
        <mass value="0.055"/>
         <origin xyz="0 0 0"/>
         <inertia ixx="0.000017012" ixy="0.0" ixz="0.0"
                  iyy="0.000013258" iyz="0.0"
                  izz="0.000009483"/>
-      </inertial>
+      </inertial>-->
 
-      <!--<inertial>
+      <inertial>
         <mass value="6.39321" />
         <inertia ixx="0.04593" ixy="-0.00259" ixz="-3e-05"
                  iyy="0.03667" iyz="-0.00031" 
                  izz="0.04858" />
-      </inertial>-->
+      </inertial>
 
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>

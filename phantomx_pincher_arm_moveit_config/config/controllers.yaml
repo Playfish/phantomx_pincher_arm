@@ -24,4 +24,4 @@ controller_list:
     default: true
     joints:
       - gripper_joint
-      - gripper2_joint
+#      - gripper2_joint

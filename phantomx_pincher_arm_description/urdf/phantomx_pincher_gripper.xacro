@@ -7,7 +7,7 @@
     <joint name="gripper_joint" type="prismatic">
       <origin xyz="0.070 0 0" rpy="0 0 0"/>
       <axis xyz="0 1 0"/>
-      <dynamics friction="2500"/>
+      <dynamics damping="5.0"/>
       <limit effort="30" velocity="0.1" lower="0.002" upper="0.032"/>
       <parent link="arm_wrist_flex_link"/>
       <child link="gripper_active_link"/>

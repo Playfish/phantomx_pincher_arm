@@ -20,12 +20,12 @@ phantomx_pincher_arm:
     type: "effort_controllers/JointTrajectoryController"
     joints: 
       - gripper_joint
-      - gripper2_joint
+#      - gripper2_joint
     gains: 
       gripper_joint: {p: 2.5, i: 0.0, d: 0.05}
-      gripper2_joint: {p: 2.5, i: 0.0, d: 0.05}
+#      gripper2_joint: {p: 2.5, i: 0.0, d: 0.05}
 
-# For GripperActionController with moveit config
+## For GripperActionController with moveit config
 #  gripper_controller:
 #    # Unfortunately this controller type works only for grippers with a single joint :( 
 #    type: "effort_controllers/GripperActionController"
